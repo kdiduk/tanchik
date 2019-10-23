@@ -10,9 +10,9 @@
 
 #define SPRITE_HEIGHT (4)
 
-extern unsigned char tank_col01[];
-extern unsigned char tank_col02[];
-extern unsigned char tank_col03[];
+extern unsigned char player_sprite1[];
+extern unsigned char player_sprite2[];
+extern unsigned char player_sprite3[];
 
 struct sp1_Rect full_screen = {0, 0, 32, 24};
 
@@ -28,10 +28,10 @@ int main()
     sprite = sp1_CreateSpr(SP1_DRAW_LOAD1LB,
             SP1_TYPE_1BYTE,
             SPRITE_HEIGHT,
-            (int)tank_col01,
+            (int)player_sprite1,
             0);
-    sp1_AddColSpr(sprite, SP1_DRAW_LOAD1, SP1_TYPE_1BYTE, (int)tank_col02, 0);
-    sp1_AddColSpr(sprite, SP1_DRAW_LOAD1, SP1_TYPE_1BYTE, (int)tank_col03, 0);
+    sp1_AddColSpr(sprite, SP1_DRAW_LOAD1, SP1_TYPE_1BYTE, (int)player_sprite2, 0);
+    sp1_AddColSpr(sprite, SP1_DRAW_LOAD1, SP1_TYPE_1BYTE, (int)player_sprite3, 0);
     sp1_AddColSpr(sprite, SP1_DRAW_LOAD1RB, SP1_TYPE_1BYTE, 0, 0);
 
     sp1_MoveSprAbs(sprite, &full_screen, 0, 4, 5, 0, 0);

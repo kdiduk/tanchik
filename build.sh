@@ -1,5 +1,12 @@
 #!/bin/bash
 
 mkdir -p bin
-zcc +zx -vn -startup=31 -clib=sdcc_iy src/main.c src/tank_sprite.asm -o bin/tank -create-app
+cd bin
+
+mkdir -p sprites
+png2sp1sprite.py ../assets/player.png -b -i player_sprite > sprites/player.asm
+
+zcc +zx -vn -startup=31 -clib=sdcc_iy ../src/main.c sprites/player.asm -o tanchik -create-app
+
+cd ..
 
