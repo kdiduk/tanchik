@@ -1,3 +1,4 @@
 src/main.c
 src/player.asm
+src/player.c
 src/grass_udg.asm 
