@@ -45,15 +45,11 @@ int main()
        }
     }
 
-    for (j = 23; j != 0; j--) {
-        for (i = 8; i != 0; i--) {
-            player_update(&full_screen);
-            sp1_UpdateNow();
-            z80_delay_ms(50);
-        }
+    while (1) {
+        player_update(&full_screen);
+        sp1_UpdateNow();
+        z80_delay_ms(50);
     }
 
-
-    while(1);
 }
 

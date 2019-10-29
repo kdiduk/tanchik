@@ -1,5 +1,6 @@
 #include <arch/zx.h>
 #include <arch/zx/sp1.h>
+#include <input.h>
 #include "player.h"
 
 #define SPRITE_HEIGHT (4)
@@ -52,10 +53,15 @@ void player_init(void)
 
 void player_update(struct sp1_Rect* rect)
 {
-    if (posy > 0) {
-        sp1_MoveSprAbs(sprite, rect, 0, posy/8, posx/8, posy%8, posx%8);
+    if (posy > 0 && in_key_pressed(IN_KEY_SCANCODE_q)) {
         posy--;
+    } else if (posy < 23 * 8 && in_key_pressed(IN_KEY_SCANCODE_a)) {
+        posy++;
+    } else {
+        return;
     }
+
+    sp1_MoveSprAbs(sprite, rect, 0, posy/8, posx/8, posy%8, posx%8);
 }
 
 /* EOF */
