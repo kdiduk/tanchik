@@ -22,15 +22,52 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
+#include <arch/zx.h>
+#include <arch/zx/sp1.h>
+#include <z80.h>
+
+#include "level.h"
 #include "game.h"
+#include "player.h"
 
-int main(void)
+#define INIT_FLAGS (SP1_IFLAG_MAKE_ROTTBL \
+                | SP1_IFLAG_OVERWRITE_TILES \
+                | SP1_IFLAG_OVERWRITE_DFILE)
+
+extern unsigned char grass_a[];
+extern unsigned char grass_b[];
+extern unsigned char grass_c[];
+extern unsigned char grass_d[];
+
+struct sp1_Rect full_screen = { 0, 0, 32, 24 };
+
+void game_init(void)
 {
-        game_init();
-        game_run();
-        game_shutdown();
+        zx_border(INK_BLACK);
 
-        return 0;
+        sp1_Initialize(INIT_FLAGS, INK_BLACK | PAPER_GREEN, ' ');
+        sp1_Invalidate(&full_screen);
+
+        sp1_TileEntry('a', grass_a);
+        sp1_TileEntry('b', grass_b);
+        sp1_TileEntry('c', grass_c);
+        sp1_TileEntry('d', grass_d);
+
+        player_init();
 }
 
-/* eof */
+void game_run(void)
+{
+        level_load();
+
+        while (1) {
+                player_update(&full_screen);
+                sp1_UpdateNow();
+                z80_delay_ms(50);
+        }
+}
+
+void game_shutdown(void)
+{
+}
+

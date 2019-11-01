@@ -22,15 +22,26 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "game.h"
+#include <arch/zx.h>
+#include <arch/zx/sp1.h>
+#include "level.h"
 
-int main(void)
+#define TILE_SHIFT(tile, row, col) \
+                ((tile) + (row) % 2) + ((col) % 2 << 1)
+
+void level_load(void)
 {
-        game_init();
-        game_run();
-        game_shutdown();
+        int row;
+        int col;
 
-        return 0;
+        for (row = 0; row < 32; row++) {
+                for (col = 0; col < 24; col++) {
+                        sp1_PrintAt(col,
+                                    row,
+                                    INK_YELLOW | PAPER_GREEN,
+                                    TILE_SHIFT('a', row, col));
+                }
+        }
 }
 
 /* eof */

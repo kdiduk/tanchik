@@ -22,15 +22,13 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "game.h"
+#ifndef TANCHIK_GAME_H
+#define TANCHIK_GAME_H
 
-int main(void)
-{
-        game_init();
-        game_run();
-        game_shutdown();
+void game_init(void);
 
-        return 0;
-}
+void game_run(void);
 
-/* eof */
+void game_shutdown(void);
+
+#endif /* TANCHIK_GAME_H */

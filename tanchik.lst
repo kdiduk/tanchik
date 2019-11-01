@@ -1,3 +1,5 @@
+src/game.c
+src/level.c
 src/main.c
 src/player.asm
 src/player.c

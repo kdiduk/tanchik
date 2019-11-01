@@ -22,15 +22,9 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include "game.h"
+#ifndef TANCHIK_LEVEL_H
+#define TANCHIK_LEVEL_H
 
-int main(void)
-{
-        game_init();
-        game_run();
-        game_shutdown();
+void level_load(void);
 
-        return 0;
-}
-
-/* eof */
+#endif /* TANCHIK_LEVEL_H */
