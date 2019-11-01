@@ -1,5 +1,3 @@
-#pragma output REGISTER_SP = 0xD000
-
 #include <arch/zx.h>
 #include <arch/zx/sp1.h>
 #include <z80.h>
