@@ -1,3 +1,27 @@
+/*
+ * MIT License
+ *
+ * Copyright (c) 2019 Kirill Diduk
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
 #include <arch/zx.h>
 #include <arch/zx/sp1.h>
 #include <input.h>
@@ -5,13 +29,23 @@
 
 #define SPRITE_HEIGHT (4)
 
+enum Direction {
+        DIRECTION_UP,
+        DIRECTION_DOWN
+};
+
+extern unsigned char player_sprite_f1[];
+extern unsigned char player_sprite_f2[];
+
 extern unsigned char player_sprite1[];
 extern unsigned char player_sprite2[];
 extern unsigned char player_sprite3[];
 
 static struct sp1_ss *sprite;
+static enum Direction direction;
 static int posx;
 static int posy;
+static unsigned char* frames[] = { player_sprite_f1, player_sprite_f2 };
 
 static void init_sprite_color(unsigned int count, struct sp1_cs *cs)
 {
@@ -21,50 +55,53 @@ static void init_sprite_color(unsigned int count, struct sp1_cs *cs)
         cs->attr = INK_BLACK | PAPER_GREEN;
 }
 
-
 void player_init(void)
 {
         sprite = sp1_CreateSpr(SP1_DRAW_LOAD1LB,
-                        SP1_TYPE_1BYTE,
-                        SPRITE_HEIGHT,
-                        (int)player_sprite1,
-                        0);
+                               SP1_TYPE_1BYTE,
+                               SPRITE_HEIGHT,
+                               0,
+                               0);
         sp1_AddColSpr(sprite,
-                        SP1_DRAW_LOAD1,
-                        SP1_TYPE_1BYTE,
-                        (int)player_sprite2,
-                        0);
+                      SP1_DRAW_LOAD1,
+                      SP1_TYPE_1BYTE,
+                      player_sprite2-player_sprite1,
+                      0);
         sp1_AddColSpr(sprite,
-                        SP1_DRAW_LOAD1,
-                        SP1_TYPE_1BYTE,
-                        (int)player_sprite3,
-                        0);
+                      SP1_DRAW_LOAD1,
+                      SP1_TYPE_1BYTE,
+                      player_sprite3-player_sprite1,
+                      0);
         sp1_AddColSpr(sprite,
-                        SP1_DRAW_LOAD1RB,
-                        SP1_TYPE_1BYTE,
-                        0,
-                        0);
+                      SP1_DRAW_LOAD1RB,
+                      SP1_TYPE_1BYTE,
+                      0,
+                      0);
 
         sp1_IterateSprChar(sprite, init_sprite_color);
 
         posx = 7 * 8;
         posy = 23 * 8;
+        direction = DIRECTION_UP;
 }
 
 void player_update(struct sp1_Rect* rect)
 {
-        if (posy > 0 && in_key_pressed(IN_KEY_SCANCODE_q))
+        if (posy > 0 && in_key_pressed(IN_KEY_SCANCODE_q)) {
                 posy--;
-        else if (posy < 23 * 8 && in_key_pressed(IN_KEY_SCANCODE_a))
+                direction = DIRECTION_UP;
+        } else if (posy < 23 * 8 && in_key_pressed(IN_KEY_SCANCODE_a)) {
                 posy++;
-        else if (posx > 0 && in_key_pressed(IN_KEY_SCANCODE_o))
+                direction = DIRECTION_DOWN;
+        } else if (posx > 0 && in_key_pressed(IN_KEY_SCANCODE_o)) {
                 posx--;
-        else if (posx < 31 * 8 && in_key_pressed(IN_KEY_SCANCODE_p))
+        } else if (posx < 31 * 8 && in_key_pressed(IN_KEY_SCANCODE_p)) {
                 posx++;
-        else
+        } else {
                 return;
+        }
 
-        sp1_MoveSprAbs(sprite, rect, 0, posy/8, posx/8, posy%8, posx%8);
+        sp1_MoveSprPix(sprite, rect, frames[direction], posx, posy);
 }
 
 /* EOF */

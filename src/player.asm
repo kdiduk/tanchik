@@ -1,7 +1,11 @@
 SECTION rodata_user
 
-; Original: 24, 24 (=3.0 x 3.0 chars)
-; Blocks: 3
+PUBLIC _player_sprite_f1
+PUBLIC _player_sprite_f2
+PUBLIC _player_sprite1
+PUBLIC _player_sprite2
+PUBLIC _player_sprite3
+
  defb @00000000
  defb @00000000
  defb @00000000
@@ -10,7 +14,7 @@ SECTION rodata_user
  defb @00000000
  defb @00000000
 
-PUBLIC _player_sprite1
+._player_sprite_f1
 ._player_sprite1
 
  defb @00000000
@@ -47,7 +51,6 @@ PUBLIC _player_sprite1
  defb @00000000
  defb @00000000
 
-PUBLIC _player_sprite2
 ._player_sprite2
 
  defb @00111100
@@ -84,7 +87,6 @@ PUBLIC _player_sprite2
  defb @00000000
  defb @00000000
 
-PUBLIC _player_sprite3
 ._player_sprite3
 
  defb @00000000
@@ -111,6 +113,116 @@ PUBLIC _player_sprite3
  defb @10111100
  defb @01100010
  defb @10111100
+
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+
+
+._player_sprite_f2
+._player_sprite11
+
+ defb @00111101
+ defb @01000110
+ defb @00111101
+ defb @01000110
+ defb @00111110
+ defb @01000110
+ defb @00111100
+ defb @01000101
+ defb @00111101
+ defb @01000101
+ defb @00111101
+ defb @01000100
+ defb @00111110
+ defb @01000110
+ defb @00111110
+ defb @01000110
+ defb @00111110
+ defb @01000111
+ defb @00111110
+ defb @01000111
+ defb @00111101
+ defb @00000000
+ defb @00000000
+ defb @00000000
+
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+
+._player_sprite21
+
+ defb @11111111
+ defb @10100101
+ defb @01011010
+ defb @00000000
+ defb @00111100
+ defb @01000010
+ defb @10011001
+ defb @00100100
+ defb @01001010
+ defb @01000010
+ defb @00100100
+ defb @10011001
+ defb @01000010
+ defb @00111100
+ defb @00011000
+ defb @00011000
+ defb @00011000
+ defb @01011010
+ defb @10111101
+ defb @01011010
+ defb @11111111
+ defb @00011000
+ defb @00011000
+ defb @00111100
+
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+
+._player_sprite31
+
+ defb @10111100
+ defb @01100010
+ defb @10111100
+ defb @01100010
+ defb @01111100
+ defb @01100010
+ defb @00111100
+ defb @10100010
+ defb @10111100
+ defb @10100010
+ defb @10111100
+ defb @00100010
+ defb @01111100
+ defb @01100010
+ defb @01111100
+ defb @01100010
+ defb @01111100
+ defb @11100010
+ defb @01111100
+ defb @11100010
+ defb @10111100
+ defb @00000000
+ defb @00000000
+ defb @00000000
 
  defb @00000000
  defb @00000000
