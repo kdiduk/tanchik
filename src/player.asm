@@ -2,6 +2,9 @@ SECTION rodata_user
 
 PUBLIC _player_sprite_f1
 PUBLIC _player_sprite_f2
+PUBLIC _player_sprite_f3
+PUBLIC _player_sprite_f4
+
 PUBLIC _player_sprite1
 PUBLIC _player_sprite2
 PUBLIC _player_sprite3
@@ -232,4 +235,215 @@ PUBLIC _player_sprite3
  defb @00000000
  defb @00000000
  defb @00000000
+
+._player_sprite_f3
+
+ defb @00000000
+ defb @01010101
+ defb @10101010
+ defb @10101010
+ defb @10101010
+ defb @11111111
+ defb @01011100
+ defb @10100001
+ defb @11000010
+ defb @10100100
+ defb @11001001
+ defb @10101010
+ defb @10101010
+ defb @11001001
+ defb @10100100
+ defb @11000010
+ defb @10100001
+ defb @01011100
+ defb @11111111
+ defb @10101010
+ defb @10101010
+ defb @10101010
+ defb @01010101
+ defb @00000000
+
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+
+ defb @00000000
+ defb @01010101
+ defb @10101010
+ defb @10101010
+ defb @10101010
+ defb @11111111
+ defb @00001111
+ defb @11100000
+ defb @00010000
+ defb @11001000
+ defb @00100100
+ defb @10010111
+ defb @00010111
+ defb @00100100
+ defb @11001000
+ defb @00010000
+ defb @11100000
+ defb @00001111
+ defb @11111111
+ defb @10101010
+ defb @10101010
+ defb @10101010
+ defb @01010101
+ defb @00000000
+
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+
+ defb @00000000
+ defb @01010000
+ defb @10101000
+ defb @10101000
+ defb @10101000
+ defb @11111000
+ defb @11110000
+ defb @01011000
+ defb @00101000
+ defb @01011000
+ defb @00101001
+ defb @11111111
+ defb @11111111
+ defb @00101001
+ defb @01011000
+ defb @00101000
+ defb @01011000
+ defb @11110000
+ defb @11111000
+ defb @10101000
+ defb @10101000
+ defb @10101000
+ defb @01010000
+ defb @00000000
+
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+
+._player_sprite_f4
+
+ defb @00000000
+ defb @00001010
+ defb @00010101
+ defb @00010101
+ defb @00010101
+ defb @00011111
+ defb @00001111
+ defb @00011010
+ defb @00010100
+ defb @00011010
+ defb @10010100
+ defb @11111111
+ defb @11111111
+ defb @10010100
+ defb @00011010
+ defb @00010100
+ defb @00011010
+ defb @00001111
+ defb @00011111
+ defb @00010101
+ defb @00010101
+ defb @00010101
+ defb @00001010
+ defb @00000000
+
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+
+
+ defb @00000000
+ defb @10101010
+ defb @01010101
+ defb @01010101
+ defb @01010101
+ defb @11111111
+ defb @11110000
+ defb @00000111
+ defb @00001000
+ defb @00010011
+ defb @00100100
+ defb @11101001
+ defb @11101000
+ defb @00100100
+ defb @00010011
+ defb @00001000
+ defb @00000111
+ defb @11110000
+ defb @11111111
+ defb @01010101
+ defb @01010101
+ defb @01010101
+ defb @10101010
+ defb @00000000
+
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+
+
+ defb @00000000
+ defb @10101010
+ defb @01010101
+ defb @01010101
+ defb @01010101
+ defb @11111111
+ defb @00111010
+ defb @10000101
+ defb @01000011
+ defb @00100101
+ defb @10010011
+ defb @01010101
+ defb @01010101
+ defb @10010011
+ defb @00100101
+ defb @01000011
+ defb @10000101
+ defb @00111010
+ defb @11111111
+ defb @01010101
+ defb @01010101
+ defb @01010101
+ defb @10101010
+ defb @00000000
+
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+ defb @00000000
+
 
