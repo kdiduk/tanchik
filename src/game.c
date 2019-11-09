@@ -39,6 +39,11 @@ extern unsigned char grass_b[];
 extern unsigned char grass_c[];
 extern unsigned char grass_d[];
 
+extern unsigned char road_a[];
+extern unsigned char road_b[];
+extern unsigned char road_c[];
+extern unsigned char road_d[];
+
 struct sp1_Rect full_screen = { 0, 0, 32, 24 };
 
 void game_init(void)
@@ -52,6 +57,11 @@ void game_init(void)
         sp1_TileEntry('b', grass_b);
         sp1_TileEntry('c', grass_c);
         sp1_TileEntry('d', grass_d);
+
+        sp1_TileEntry('w', road_a);
+        sp1_TileEntry('x', road_b);
+        sp1_TileEntry('y', road_c);
+        sp1_TileEntry('z', road_d);
 
         player_init();
 }

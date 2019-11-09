@@ -42,6 +42,15 @@ void level_load(void)
                                     TILE_SHIFT('a', row, col));
                 }
         }
+
+        for (row = 2; row < 6; row++) {
+                for (col = 0; col < 24; col++) {
+                        sp1_PrintAt(col,
+                                    row,
+                                    INK_BLACK | PAPER_WHITE,
+                                    'w' + row - 2);
+                }
+        }
 }
 
 /* eof */
