@@ -1,4 +1,5 @@
 src/game.c
+src/interrupt.c
 src/level.c
 src/main.c
 src/player.asm

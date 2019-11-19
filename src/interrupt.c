@@ -21,56 +21,32 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
-
-#include <arch/zx.h>
-#include <arch/zx/sp1.h>
+#include <im2.h>
 #include <intrinsic.h>
-
+#include <string.h>
+#include <z80.h>
 #include "interrupt.h"
-#include "level.h"
-#include "game.h"
-#include "player.h"
 
-#define INIT_FLAGS (SP1_IFLAG_MAKE_ROTTBL \
-                | SP1_IFLAG_OVERWRITE_TILES \
-                | SP1_IFLAG_OVERWRITE_DFILE)
+#define TABLE_HIGH_BYTE        ((unsigned int)0xD0)
+#define JUMP_POINT_HIGH_BYTE   ((unsigned int)0xD1)
 
-extern unsigned char road_a[];
-extern unsigned char road_b[];
-extern unsigned char road_c[];
-extern unsigned char road_d[];
+#define UI_256          ((unsigned int)256)
+#define TABLE_ADDR      ((void*)(TABLE_HIGH_BYTE * UI_256))
+#define JUMP_POINT      ((unsigned char*)( \
+                (unsigned int)(JUMP_POINT_HIGH_BYTE * UI_256) \
+                + JUMP_POINT_HIGH_BYTE))
 
-struct sp1_Rect full_screen = { 0, 0, 32, 24 };
-
-void game_init(void)
-{
-        interrupt_init();
-        zx_border(INK_BLACK);
-
-        sp1_Initialize(INIT_FLAGS, INK_BLACK | PAPER_GREEN, ' ');
-        sp1_Invalidate(&full_screen);
-
-        sp1_TileEntry('w', road_a);
-        sp1_TileEntry('x', road_b);
-        sp1_TileEntry('y', road_c);
-        sp1_TileEntry('z', road_d);
-
-        player_init();
-}
-
-void game_run(void)
-{
-        level_load();
-
-        while (1) {
-                player_update(&full_screen);
-                intrinsic_halt();
-                sp1_UpdateNow();
-                intrinsic_halt();
-        }
-}
-
-void game_shutdown(void)
+IM2_DEFINE_ISR(isr)
 {
 }
 
+void interrupt_init(void)
+{
+        memset(TABLE_ADDR, JUMP_POINT_HIGH_BYTE, 257);
+        z80_bpoke(JUMP_POINT, 195);
+        z80_wpoke(JUMP_POINT+1, (unsigned int)isr);
+        im2_init(TABLE_ADDR);
+        intrinsic_ei();
+}
+
+/* EOF */

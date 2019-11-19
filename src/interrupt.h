@@ -21,56 +21,9 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
  * DEALINGS IN THE SOFTWARE.
  */
+#ifndef TANCHIK_INTERRUPT_H
+#define TANCHIK_INTERRUPT_H
 
-#include <arch/zx.h>
-#include <arch/zx/sp1.h>
-#include <intrinsic.h>
+void interrupt_init(void);
 
-#include "interrupt.h"
-#include "level.h"
-#include "game.h"
-#include "player.h"
-
-#define INIT_FLAGS (SP1_IFLAG_MAKE_ROTTBL \
-                | SP1_IFLAG_OVERWRITE_TILES \
-                | SP1_IFLAG_OVERWRITE_DFILE)
-
-extern unsigned char road_a[];
-extern unsigned char road_b[];
-extern unsigned char road_c[];
-extern unsigned char road_d[];
-
-struct sp1_Rect full_screen = { 0, 0, 32, 24 };
-
-void game_init(void)
-{
-        interrupt_init();
-        zx_border(INK_BLACK);
-
-        sp1_Initialize(INIT_FLAGS, INK_BLACK | PAPER_GREEN, ' ');
-        sp1_Invalidate(&full_screen);
-
-        sp1_TileEntry('w', road_a);
-        sp1_TileEntry('x', road_b);
-        sp1_TileEntry('y', road_c);
-        sp1_TileEntry('z', road_d);
-
-        player_init();
-}
-
-void game_run(void)
-{
-        level_load();
-
-        while (1) {
-                player_update(&full_screen);
-                intrinsic_halt();
-                sp1_UpdateNow();
-                intrinsic_halt();
-        }
-}
-
-void game_shutdown(void)
-{
-}
-
+#endif /* TANCHIK_INTERRUPT_H */
