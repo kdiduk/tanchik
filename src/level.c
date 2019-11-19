@@ -34,14 +34,16 @@ void level_load(void)
         int row;
         int col;
 
+        /*
         for (row = 0; row < 32; row++) {
                 for (col = 0; col < 24; col++) {
                         sp1_PrintAt(col,
                                     row,
-                                    INK_YELLOW | PAPER_GREEN,
+                                    INK_BLACK | PAPER_GREEN,
                                     TILE_SHIFT('a', row, col));
                 }
         }
+        */
 
         for (row = 2; row < 6; row++) {
                 for (col = 0; col < 24; col++) {

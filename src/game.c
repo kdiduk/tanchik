@@ -34,11 +34,6 @@
                 | SP1_IFLAG_OVERWRITE_TILES \
                 | SP1_IFLAG_OVERWRITE_DFILE)
 
-extern unsigned char grass_a[];
-extern unsigned char grass_b[];
-extern unsigned char grass_c[];
-extern unsigned char grass_d[];
-
 extern unsigned char road_a[];
 extern unsigned char road_b[];
 extern unsigned char road_c[];
@@ -52,11 +47,6 @@ void game_init(void)
 
         sp1_Initialize(INIT_FLAGS, INK_BLACK | PAPER_GREEN, ' ');
         sp1_Invalidate(&full_screen);
-
-        sp1_TileEntry('a', grass_a);
-        sp1_TileEntry('b', grass_b);
-        sp1_TileEntry('c', grass_c);
-        sp1_TileEntry('d', grass_d);
 
         sp1_TileEntry('w', road_a);
         sp1_TileEntry('x', road_b);

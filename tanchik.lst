@@ -3,5 +3,4 @@ src/level.c
 src/main.c
 src/player.asm
 src/player.c
-src/grass_udg.asm 
 src/road_udg.asm
