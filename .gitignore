@@ -1,5 +1,5 @@
 bin/
 *.def
 *.swp
+.vimrc
 run.sh
-
