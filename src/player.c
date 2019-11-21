@@ -80,8 +80,8 @@ void player_init(void)
                       0,
                       0);
 
-        posx = 7 * 8;
-        posy = MAX_POSY;
+        posx = 4;
+        posy = MAX_POSY - 4;
         direction = DIRECTION_UP;
 }
 

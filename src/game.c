@@ -30,15 +30,11 @@
 #include "level.h"
 #include "game.h"
 #include "player.h"
+#include "tileset.h"
 
 #define INIT_FLAGS (SP1_IFLAG_MAKE_ROTTBL \
                 | SP1_IFLAG_OVERWRITE_TILES \
                 | SP1_IFLAG_OVERWRITE_DFILE)
-
-extern unsigned char road_a[];
-extern unsigned char road_b[];
-extern unsigned char road_c[];
-extern unsigned char road_d[];
 
 struct sp1_Rect full_screen = { 0, 0, 32, 24 };
 
@@ -50,10 +46,7 @@ void game_init(void)
         sp1_Initialize(INIT_FLAGS, INK_BLACK | PAPER_GREEN, ' ');
         sp1_Invalidate(&full_screen);
 
-        sp1_TileEntry('w', road_a);
-        sp1_TileEntry('x', road_b);
-        sp1_TileEntry('y', road_c);
-        sp1_TileEntry('z', road_d);
+        tileset_init();
 
         player_init();
 }

@@ -22,36 +22,12 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include <arch/zx.h>
-#include <arch/zx/sp1.h>
-#include "level.h"
-#include "tileset.h"
+#ifndef TANCHIK_TILESET_H
+#define TANCHIK_TILESET_H
 
-#define TILE_SHIFT(tile, row, col) \
-                ((tile) + (row) % 2) + ((col) % 2 << 1)
+#define TILES_BASE 128
+#define TILES_LEN 13
+ 
+void tileset_init(void);
 
-void level_load(void)
-{
-        unsigned char row;
-        unsigned char col;
-
-        for (col = 4; col < 8; col++) {
-                for (row = 0; row < 24; row++) {
-                        sp1_PrintAtInv(row,
-                                       col,
-                                       INK_BLACK | PAPER_WHITE,
-                                       TILES_BASE + col - 4);
-                }
-        }
-
-        for (col = 16; col < 24; col++) {
-                for (row = 0; row < 24; row++) {
-                        sp1_PrintAt(row,
-                                    col,
-                                    INK_CYAN | PAPER_BLUE,
-                                    TILES_BASE + 4);
-                }
-        }
-}
-
-/* eof */
+#endif /* TANCHIK_TILESET_H */
