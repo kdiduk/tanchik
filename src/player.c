@@ -25,6 +25,7 @@
 #include <arch/zx.h>
 #include <arch/zx/sp1.h>
 #include <input.h>
+#include "control.h"
 #include "player.h"
 
 #define SPRITE_HEIGHT (4)
@@ -87,16 +88,16 @@ void player_init(void)
 
 void player_update(struct sp1_Rect* rect)
 {
-        if (posy > 0 && in_key_pressed(IN_KEY_SCANCODE_q)) {
+        if (posy > 0 && control_pressed(CONTROL_UP)) {
                 posy--;
                 direction = DIRECTION_UP;
-        } else if (posy < MAX_POSY && in_key_pressed(IN_KEY_SCANCODE_a)) {
+        } else if (posy < MAX_POSY && control_pressed(CONTROL_DOWN)) {
                 posy++;
                 direction = DIRECTION_DOWN;
-        } else if (posx > 0 && in_key_pressed(IN_KEY_SCANCODE_o)) {
+        } else if (posx > 0 && control_pressed(CONTROL_LEFT)) {
                 posx--;
                 direction = DIRECTION_LEFT;
-        } else if (posx < MAX_POSX && in_key_pressed(IN_KEY_SCANCODE_p)) {
+        } else if (posx < MAX_POSX && control_pressed(CONTROL_RIGHT)) {
                 posx++;
                 direction = DIRECTION_RIGHT;
         }

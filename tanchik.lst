@@ -1,3 +1,4 @@
+src/control.c
 src/game.c
 src/interrupt.c
 src/level.c
