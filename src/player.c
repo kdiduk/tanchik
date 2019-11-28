@@ -24,7 +24,6 @@
 
 #include <arch/zx.h>
 #include <arch/zx/sp1.h>
-#include <input.h>
 #include "control.h"
 #include "player.h"
 
