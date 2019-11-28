@@ -7,7 +7,7 @@ ZORG=32768
 mkdir -p bin
 cd bin
 
-zcc +zx -startup=31 -clib=sdcc_iy @../tanchik.lst \
+zcc +zx -Wall -startup=31 -clib=sdcc_iy @../tanchik.lst \
 	-pragma-include:../zpragma.inc -o tanchik
 
 appmake +zx -b tanchik_CODE.bin -o tanchik.tap \
