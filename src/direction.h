@@ -22,49 +22,14 @@
  * DEALINGS IN THE SOFTWARE.
  */
 
-#include <arch/zx.h>
-#include <arch/zx/sp1.h>
-#include <intrinsic.h>
+#ifndef TANCHIK_DIRECTION_H
+#define TANCHIK_DIRECTION_H
 
-#include "interrupt.h"
-#include "level.h"
-#include "game.h"
-#include "player.h"
-#include "tileset.h"
+enum direction {
+    DIR_UP,
+    DIR_DOWN,
+    DIR_LEFT,
+    DIR_RIGHT
+};
 
-#define INIT_FLAGS (SP1_IFLAG_MAKE_ROTTBL \
-                | SP1_IFLAG_OVERWRITE_TILES \
-                | SP1_IFLAG_OVERWRITE_DFILE)
-
-struct sp1_Rect full_screen = { 0, 0, 32, 24 };
-
-void game_init(void)
-{
-        interrupt_init();
-        zx_border(INK_BLACK);
-
-        sp1_Initialize(INIT_FLAGS, INK_BLACK | PAPER_GREEN, ' ');
-        sp1_Invalidate(&full_screen);
-
-        tileset_init();
-
-        player_init();
-}
-
-void game_run(void)
-{
-        level_load();
-
-        while (1) {
-                player_update();
-                player_render(&full_screen);
-                intrinsic_halt();
-                sp1_UpdateNow();
-                intrinsic_halt();
-        }
-}
-
-void game_shutdown(void)
-{
-}
-
+#endif /* TANCHIK_DIRECTION_H */

@@ -25,18 +25,13 @@
 #include <arch/zx.h>
 #include <arch/zx/sp1.h>
 #include "control.h"
+#include "direction.h"
 #include "player.h"
 
 #define SPRITE_HEIGHT (4)
 #define MAX_POSX ((32-SPRITE_HEIGHT+1) * 8)
 #define MAX_POSY ((24-SPRITE_HEIGHT+1) * 8)
 
-enum Direction {
-        DIRECTION_UP,
-        DIRECTION_DOWN,
-        DIRECTION_RIGHT,
-        DIRECTION_LEFT
-};
 
 extern unsigned char player_sprite_f1[];
 extern unsigned char player_sprite_f2[];
@@ -49,11 +44,11 @@ extern unsigned char player_sprite3[];
 
 static const unsigned char* frames[] = { player_sprite_f1,
                                          player_sprite_f2,
-                                         player_sprite_f3,
-                                         player_sprite_f4 };
+                                         player_sprite_f4,
+                                         player_sprite_f3 };
 
 static struct sp1_ss *sprite;
-static enum Direction direction;
+static enum direction direction;
 static int posx;
 static int posy;
 
@@ -82,26 +77,44 @@ void player_init(void)
 
         posx = 4;
         posy = MAX_POSY - 4;
-        direction = DIRECTION_UP;
+        direction = DIR_UP;
 }
 
-void player_update(struct sp1_Rect* rect)
+void player_update(void)
 {
         if (posy > 0 && control_pressed(CONTROL_UP)) {
-                posy--;
-                direction = DIRECTION_UP;
+                player_move(DIR_UP);
         } else if (posy < MAX_POSY && control_pressed(CONTROL_DOWN)) {
-                posy++;
-                direction = DIRECTION_DOWN;
+                player_move(DIR_DOWN);
         } else if (posx > 0 && control_pressed(CONTROL_LEFT)) {
-                posx--;
-                direction = DIRECTION_LEFT;
+                player_move(DIR_LEFT);
         } else if (posx < MAX_POSX && control_pressed(CONTROL_RIGHT)) {
-                posx++;
-                direction = DIRECTION_RIGHT;
+                player_move(DIR_RIGHT);
         }
+}
 
+void player_render(struct sp1_Rect* rect)
+{
         sp1_MoveSprPix(sprite, rect, frames[direction], posx, posy);
+}
+
+void player_move(enum direction d)
+{
+        direction = d;
+        switch (d) {
+        case DIR_UP:
+                posy--;
+                break;
+        case DIR_DOWN:
+                posy++;
+                break;
+        case DIR_LEFT:
+                posx--;
+                break;
+        case DIR_RIGHT:
+                posx++;
+                break;
+        }
 }
 
 /* EOF */
