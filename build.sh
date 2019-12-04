@@ -8,7 +8,7 @@ mkdir -p bin
 cd bin
 
 zcc +zx -Wall -startup=31 -clib=sdcc_iy @../tanchik.lst \
-	-pragma-include:../zpragma.inc -o tanchik
+	-I../include -pragma-include:../zpragma.inc -o tanchik
 
 appmake +zx -b tanchik_CODE.bin -o tanchik.tap \
 	--blockname tanchik --org ${ZORG}
