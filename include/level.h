@@ -25,6 +25,6 @@
 #ifndef TANCHIK_LEVEL_H
 #define TANCHIK_LEVEL_H
 
-void level_load(void);
+void level_load(struct sp1_Rect* rect);
 
 #endif /* TANCHIK_LEVEL_H */

@@ -30,7 +30,6 @@
 #include "level.h"
 #include "game.h"
 #include "player.h"
-#include "tileset.h"
 
 #define INIT_FLAGS (SP1_IFLAG_MAKE_ROTTBL \
                 | SP1_IFLAG_OVERWRITE_TILES \
@@ -46,14 +45,12 @@ void game_init(void)
         sp1_Initialize(INIT_FLAGS, INK_BLACK | PAPER_GREEN, ' ');
         sp1_Invalidate(&full_screen);
 
-        tileset_init();
-
         player_init();
 }
 
 void game_run(void)
 {
-        level_load();
+        level_load(&full_screen);
 
         while (1) {
                 player_update();

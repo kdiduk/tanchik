@@ -5,5 +5,3 @@ src/level.c
 src/main.c
 src/player.asm
 src/player.c
-src/tileset.c
-
